@@ -40,7 +40,7 @@
                 }
             } else {
                 $board[]=$_REQUEST['name'].': '.$_REQUEST['contents'];
-                file_put_contents($file, json_decode($board));
+                file_put_contents($file, json_encode($board));
                 foreach ($board as $printer) {
                     echo '<p>', $printer, '</p><br>';
                 }
