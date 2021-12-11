@@ -6,9 +6,10 @@
     </head>
     <body>
         <?php
+        session_start();
         unset($_SESSION['user']);
         $pdo = new PDO ('mysql:host=localhost;dbname=login_db;charset=utf8;', 'admin', 'password');
-        $sql=$pdo->prepare('select * from login where username=? and password=?');
+        $sql=$pdo->prepare('select * from login_list where username=? and password=?');
         if ($sql->execute([$_REQUEST['username'], $_REQUEST['password']])) {
             foreach ($sql as $row) {
                 $_SESSION['user']=[
@@ -18,10 +19,11 @@
             }
         }
         if (isset($_SESSION['user'])) {
-            echo 'ログインしました';
+            echo $_SESSION['user']['username'], 'としてログインしました';
         } else {
             echo 'ユーザー名またはパスワードが違います';
         }
+        echo '<br><a href="./billboard-9.php">戻る</a>';
         ?>
     </body>
 </html>

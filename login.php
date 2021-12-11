@@ -6,8 +6,9 @@
     </head>
     <body>
         <form action="login-output.php" method="post">
-            ユーザー名: <input type="text" name="username">
+            ユーザー名: <input type="text" name="username"><br>
             パスワード: <input type="password" name="password">
+            <input type="submit" value="ログイン">
         </form>
     </body>
 </html>

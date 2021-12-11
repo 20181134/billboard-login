@@ -8,10 +8,10 @@
         <?php
         session_start();
         // ログイン機能
-        if (!isset($_SESSION['user'])) {
-            echo '<a href="./login">ログイン</a>';
+        if (isset($_SESSION['user'])) {
+            echo $_SESSION['user']['username'], ' としてログイン中';
         } else {
-            echo $_SESSION['user']['username'];
+            echo '<a href="./login.php">ログイン</a>';
         }
         ?>
         <hr>
@@ -19,15 +19,16 @@
         <form action="" method="post">
             <?php
             if (!isset($_SESSION['user'])) {
-                echo 'ユーザー名: <input type="text" name="name">';
+                echo 'ユーザー名: <input type="text" name="name"><br>';
             } else {
-                echo 'ユーザー名: ', $_SESSION['user']['username'];
+                echo 'ユーザー名: ', $_SESSION['user']['username'], '<br>';
             }
             ?>
             本文: <textarea name="contents"></textarea>
+            <input type="submit" value="投稿">
         </form>
         <?php
-        $file="board.json";
+        $file="board.txt";
         if (file_exists($file)) {
             $board=json_decode(file_get_contents($file));
         }
@@ -52,7 +53,7 @@
                 }
             } else {
                 $board[]=$_SESSION['user']['username'].': '.$_REQUEST['contents'];
-                file_put_contents($file, json_decode($board));
+                file_put_contents($file, json_encode($board));
                 foreach ($board as $printer) {
                     echo '<p>', $printer, '</p><br>';
                 }
