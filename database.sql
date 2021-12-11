@@ -7,3 +7,4 @@ create table login_list (
     username varchar(30) not null,
     password varchar(30) not null
 )
+insert into login_list values('user', 'password');
