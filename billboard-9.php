@@ -9,7 +9,7 @@
         session_start();
         // ログイン機能
         if (isset($_SESSION['user'])) {
-            echo $_SESSION['user']['username'], ' としてログイン中';
+            echo '<a href="./logout.php">', $_SESSION['user']['username'], ' としてログイン中</a>';
         } else {
             echo '<a href="./login.php">ログイン</a>';
         }
